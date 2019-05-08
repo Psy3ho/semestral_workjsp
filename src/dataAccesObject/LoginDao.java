@@ -38,6 +38,7 @@ public class LoginDao {
                     succes = "SUCCESS";
                 }
             }
+            con.close();
         } catch(SQLException e)
             {
                 e.printStackTrace();

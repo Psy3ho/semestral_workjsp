@@ -4,7 +4,7 @@
 <%@ page import="helpMetods.HelpMethods" %>
 <%@ page import="controllers.UserController" %>
 <%@ page import="cards.User" %>
-<%@ page import="controllers.UserEmailController" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: egoeu
   Date: 5. 5. 2019
@@ -56,7 +56,7 @@
             if(session.getAttribute("userLogged")!= null){
               %>
           <li class="nav-item">
-            <a class="nav-link" href="LogoutServlet">Pridaj príspevok</a>
+            <a class="nav-link" href="addPost.jsp">Pridaj príspevok</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="LogoutServlet">Odhlásiť sa</a>
@@ -90,7 +90,7 @@
             <span class="subheading">
               <%
                 if(session.getAttribute("userLogged")!= null){
-                  User user = new UserEmailController().getUser(String.valueOf(session.getAttribute("userLogged")));
+                  User user = new UserController().getUserEmail(String.valueOf(session.getAttribute("userLogged")));
                   out.print("Vitaj " +user.getName());
                 } else {
                   %> Vitaj na mojom semestrálnom blogu<%
@@ -112,7 +112,7 @@
           for (int i =0; i< postArrayList.size();i++) {
         %>
         <div class="post-preview">
-          <a href="post.jsp?postId=<%=i+1%>">
+          <a href="post.jsp?postId=<%=postArrayList.get(i).getId()%>">
             <h2 class="post-title">
                 <%=postArrayList.get(i).getTitle()%>
             </h2 >

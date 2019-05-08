@@ -1,4 +1,4 @@
-package controllers;
+package controllers.auth;
 
 import cards.User;
 import dataAccesObject.LoginDao;
@@ -15,7 +15,7 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        User user = new User(null,email,password);
+        User user = new User(null,null,email,password);
 
         LoginDao loginDao = new LoginDao();
 

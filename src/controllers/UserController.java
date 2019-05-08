@@ -29,4 +29,28 @@ public class UserController {
 
         return  user;
     }
+
+    public User getUserEmail(String email) {
+
+        User user = null;
+        Connection connection = DatabaseConnectionManager.getConnection();
+        Statement s;
+        ResultSet rs;
+
+        try {
+            s = connection.createStatement();
+            String emailString = "'"+email+"'";
+            String sql = "SELECT * FROM users WHERE email = "+emailString+";";
+            rs = s.executeQuery(sql);
+            if(rs.next()) {
+                user = HelpMethods.getDataUser(rs);
+            }
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return  user;
+    }
 }

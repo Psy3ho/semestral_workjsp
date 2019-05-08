@@ -1,4 +1,4 @@
-package controllers;
+package controllers.auth;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

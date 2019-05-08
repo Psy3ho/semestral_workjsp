@@ -8,7 +8,7 @@
         <description>registracia pouzivatela</description>
         <display-name>RegisterServlet</display-name>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>controllers.RegisterServlet</servlet-class>
+        <servlet-class>controllers.auth.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -19,7 +19,7 @@
         <description>prihlasenie pouzivatela</description>
         <display-name>LoginServlet</display-name>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>controllers.LoginServlet</servlet-class>
+        <servlet-class>controllers.auth.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -30,11 +30,44 @@
         <description>odhlasenie pouzivate</description>
         <display-name>LogoutServlet</display-name>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>controllers.LogoutServlet</servlet-class>
+        <servlet-class>controllers.auth.LogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <description>pridanie prispevku</description>
+        <display-name>AddPostServlet</display-name>
+        <servlet-name>AddPostServlet</servlet-name>
+        <servlet-class>controllers.AddPostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddPostServlet</servlet-name>
+        <url-pattern>/AddPostServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <description>odstranenie prispevku</description>
+        <display-name>DeletePostServlet</display-name>
+        <servlet-name>DeletePostServlet</servlet-name>
+        <servlet-class>controllers.DeletePostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeletePostServlet</servlet-name>
+        <url-pattern>/DeletePostServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <description>upravenie prispevku</description>
+        <display-name>EditPostServlet</display-name>
+        <servlet-name>EditPostServlet</servlet-name>
+        <servlet-class>controllers.EditPostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditPostServlet</servlet-name>
+        <url-pattern>/EditPostServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

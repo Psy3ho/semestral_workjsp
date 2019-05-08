@@ -1,4 +1,4 @@
-package controllers;
+package controllers.auth;
 
 import cards.User;
 import dataAccesObject.RegisterDao;
@@ -14,7 +14,7 @@ public class RegisterServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        User user = new User(name ,email,password);
+        User user = new User(null,name ,email,password);
 
 
         RegisterDao registerDao = new RegisterDao();

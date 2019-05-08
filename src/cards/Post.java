@@ -1,9 +1,10 @@
 package cards;
 
 public class Post {
-    private String userId, title, text, image, date;
+    private String id, userId, title, text, image, date;
 
-    public Post(String userId, String title, String text, String image, String date) {
+    public Post(String id,String userId, String title, String text, String image, String date) {
+        this.id = id;
         this.userId = userId;
         this.title = title;
         this.text = text;
@@ -11,7 +12,7 @@ public class Post {
         this.date = date;
     }
 
-
+    public String getId(){return  id;}
 
     public String getUserId() {
         return userId;

@@ -36,7 +36,7 @@
   <body>
 <%
   request.setCharacterEncoding("UTF-8");
-  ArrayList<Post> postArrayList =  new PostsController().getPosts();
+  ArrayList<Post> postArrayList =  new PostsController().getPosts(0);
 %>
 
   <!-- Navigation -->
@@ -49,10 +49,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="about.jsp">O nás</a>
-          </li>
-          <%
+              <%
             if(session.getAttribute("userLogged")!= null){
               %>
           <li class="nav-item">
@@ -107,7 +104,7 @@
   <!-- Main Content -->
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="col-lg-8 col-md-10 mx-auto" id="postsContainer">
         <%
           for (int i =0; i< postArrayList.size();i++) {
         %>
@@ -118,20 +115,29 @@
             </h2 >
           </a >
           <p class="post-meta" >
-
-                <%=postArrayList.get(i).getText()%>
-            <a href = "#" > Start Bootstrap</a >
-                <%=postArrayList.get(i).getDate()%>
+                <%
+                  String temp  =postArrayList.get(i).getText();
+                  int a;
+                  if(temp.length()<150){ a= temp.length();}else { a = 150;};
+                  out.print(temp.substring(0,a));
+                %>
           </p >
+          <p>
+            <a  >Pridáné </a >
+            <%=postArrayList.get(i).getDate()%>
+          </p>
         </div >
         <hr >
 
                 <%
     }
         %>
-        <!-- Pager -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          <button class="btn btn-primary float-right" id="loadOlderPosts" data-page="1">Staršie články</button>
         </div>
       </div>
     </div>
@@ -170,7 +176,7 @@
               </a>
             </li>
           </ul>
-          <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+          <p class="copyright text-muted">Copyright &copy; PSY3HO Website 2019</p>
         </div>
       </div>
     </div>
@@ -182,6 +188,7 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
+  <script src="js/ajax-pagination.js"></script>
 
   </body>
 </html>

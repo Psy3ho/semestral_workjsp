@@ -27,6 +27,7 @@ import java.util.List;
 @MultipartConfig
 public class AddPostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String title = request.getParameter("title");
         String text = request.getParameter("text");
         String user_id = request.getParameter("user_id");

@@ -2,6 +2,7 @@ package controllers.auth;
 
 import cards.User;
 import dataAccesObject.RegisterDao;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,12 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
 
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        User user = new User(null,name ,email,password);
 
+        String generatedSecuredPasswordHash = BCrypt.hashpw(password, BCrypt.gensalt(12));
+
+        User user = new User(null,name ,email,generatedSecuredPasswordHash);
 
         RegisterDao registerDao = new RegisterDao();
         String userRegistered = registerDao.registerUser(user);

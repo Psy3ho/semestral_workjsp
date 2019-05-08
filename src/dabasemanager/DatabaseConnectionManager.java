@@ -8,7 +8,7 @@ public class DatabaseConnectionManager {
     public static Connection getConnection(){
         Connection connection = null;
         try {
-            String connectionURL = "jdbc:mysql://localhost:3306/finaldb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            String connectionURL = "jdbc:mysql://localhost:3306/finaldb?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             connection = DriverManager.getConnection(connectionURL, "root", "");
 

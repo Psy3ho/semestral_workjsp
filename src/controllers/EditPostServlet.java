@@ -21,6 +21,7 @@ import java.io.InputStream;
 @MultipartConfig
 public class EditPostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
         String title = request.getParameter("title");
         String text = request.getParameter("text");

@@ -66,9 +66,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="about.jsp">O nás</a>
-                </li>
                 <%
                     if(session.getAttribute("userLogged")!= null){
                 %>
@@ -174,7 +171,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+                <p class="copyright text-muted">Copyright &copy; PSY3HO Website 2019</p>
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ import dabasemanager.DatabaseConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class AddPostDao {
     public String addPost(Post post)
@@ -28,9 +29,7 @@ public class AddPostDao {
             preparedStatement.setString(2, title);
             preparedStatement.setString(3, text);
             preparedStatement.setString(4, image);
-
             preparedStatement.executeUpdate();
-
             con.close();
 
 

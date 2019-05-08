@@ -2,6 +2,7 @@ package dataAccesObject;
 
 import cards.User;
 import dabasemanager.DatabaseConnectionManager;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -34,7 +35,7 @@ public class LoginDao {
                 emailDB = resultSet.getString("email");
                 passwordDB = resultSet.getString("password");
 
-                if (email.equals(emailDB) && password.equals(passwordDB)) {
+                if (email.equals(emailDB) && BCrypt.checkpw(password, passwordDB)) {
                     succes = "SUCCESS";
                 }
             }

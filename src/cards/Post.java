@@ -1,26 +1,17 @@
 package cards;
 
 public class Post {
-    private int id;
-    private String userId, title, text, slug, image, date;
+    private String userId, title, text, image, date;
 
-    public Post(int id, String userId, String title, String text, String slug, String image, String date) {
-        this.id = id;
+    public Post(String userId, String title, String text, String image, String date) {
         this.userId = userId;
         this.title = title;
         this.text = text;
-        this.slug = slug;
         this.image = image;
         this.date = date;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUserId() {
         return userId;
@@ -46,14 +37,6 @@ public class Post {
         this.text = text;
     }
 
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
     public String getImage() {
         return image;
     }
@@ -62,11 +45,7 @@ public class Post {
         this.image = image;
     }
 
-    public String getDate() {
-        return date;
-    }
+    public String getDate() {return date; }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+    public void setDate(String date) { this.date = date; }
 }

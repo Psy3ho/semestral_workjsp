@@ -34,37 +34,67 @@
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
+
+    <script>
+        function validate()
+        {
+            var name = document.form.name.value;
+            var email = document.form.email.value;
+            var password = document.form.password.value;
+            var conpassword= document.form.conpassword.value;
+
+            if (name==null || name=="")
+            {
+                alert("Napíšte svoje meno prosím.");
+                return false;
+            }
+            else if (email==null || email=="")
+            {
+                alert("Napíšte svoj email prosím.");
+                return false;
+            }
+            else if(password.length<6)
+            {
+                alert("Heslo musí mať aspoň 6 znakov.");
+                return false;
+            }
+            else if (password!=conpassword)
+            {
+                alert("Heslá sa nezhodujú.");
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form">
+            <form class="login100-form validate-form" name="form" action="RegisterServlet" method="post" onsubmit="return validate()">
 					<span class="login100-form-title p-b-34">
 						Registrácia
 					</span>
 
-                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
-                    <input id="email" class="input100" type="text" name="username" placeholder="Email">
+                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
+                    <input class="input100" type="text" name="name" placeholder="Meno">
                     <span class="focus-input100"></span>
                 </div>
-                <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
-                    <input class="input100" type="password" name="pass" placeholder="Meno">
+                <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20">
+                    <input class="input100" type="email" name="email" placeholder="Email">
                     <span class="focus-input100"></span>
                 </div>
-                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
-                <input id="first-name" class="input100" type="text" name="username" placeholder="Heslo">
+                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
+                <input class="input100" type="password" name="password" placeholder="Heslo">
                 <span class="focus-input100"></span>
                 </div>
-                <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
-                    <input class="input100" type="password" name="pass" placeholder="Zopakuj heslo">
+                <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20">
+                    <input class="input100" type="password" name="conpassword" placeholder="Zopakuj heslo">
                     <span class="focus-input100"></span>
                 </div>
-
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn">
-                        Prihlásiť sa
+                    <button class="login100-form-btn" type="submit">
+                        Registrovať sa
                     </button>
                 </div>
 

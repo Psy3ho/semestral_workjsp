@@ -1,32 +1,32 @@
 package controllers;
 
-import cards.Post;
+import cards.User;
 import dabasemanager.DatabaseConnectionManager;
 import helpMetods.HelpMethods;
 
 import java.sql.*;
-import java.util.ArrayList;
-public class PostsController {
-    public ArrayList<Post> getPosts() {
 
-        ArrayList<Post> listPosts = new ArrayList<>();
+public class UserController {
+    public User getUser(String userId) {
+
+        User user = null;
         Connection connection = DatabaseConnectionManager.getConnection();
         Statement s;
         ResultSet rs;
 
         try {
             s = connection.createStatement();
-            String sql = "SELECT * FROM posts;";
+            String sql = "SELECT * FROM users WHERE id ="+userId+";";
             rs = s.executeQuery(sql);
-            while(rs.next()){
-                listPosts.add(HelpMethods.getDataPost(rs));
+            if(rs.next()) {
+                user = HelpMethods.getDataUser(rs);
             }
             connection.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return  listPosts;
-
+        return  user;
     }
 }

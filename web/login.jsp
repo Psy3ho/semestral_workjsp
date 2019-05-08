@@ -34,28 +34,47 @@
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
+
+    <script>
+        function validate()
+        {
+            var email = document.form.email.value;
+            var password = document.form.password.value;
+
+            if (email==null || email=="")
+            {
+                alert("Username cannot be blank");
+                return false;
+            }
+            else if(password==null || password=="")
+            {
+                alert("Password cannot be blank");
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form">
+            <form class="login100-form validate-form" name="form" action="LoginServlet" method="post" onsubmit="return validate()">
 					<span class="login100-form-title p-b-34">
 						Prihlásiť sa do účtu
 					</span>
 
-                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
-                    <input id="first-name" class="input100" type="text" name="username" placeholder="Meno">
+                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
+                    <input class="input100" type="email" name="email" placeholder="Email">
                     <span class="focus-input100"></span>
                 </div>
-                <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
-                    <input class="input100" type="password" name="pass" placeholder="Heslo">
+                <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20">
+                    <input class="input100" type="password" name="password" placeholder="Heslo">
                     <span class="focus-input100"></span>
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn">
+                    <button class="login100-form-btn" type="submit">
                         Prihlásiť sa
                     </button>
                 </div>

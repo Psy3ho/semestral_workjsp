@@ -1,6 +1,10 @@
 <%@ page import="cards.Post" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="controllers.PostsController" %><%--
+<%@ page import="controllers.PostsController" %>
+<%@ page import="helpMetods.HelpMethods" %>
+<%@ page import="controllers.UserController" %>
+<%@ page import="cards.User" %>
+<%@ page import="controllers.UserEmailController" %><%--
   Created by IntelliJ IDEA.
   User: egoeu
   Date: 5. 5. 2019
@@ -15,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog - Start Bootstrap Theme</title>
+    <title>Moj Blog</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +42,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.jsp">Start Bootstrap</a>
+      <a class="navbar-brand" href="index.jsp">Domov</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -46,20 +50,30 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.jsp">Home</a>
+            <a class="nav-link" href="about.jsp">O nás</a>
+          </li>
+          <%
+            if(session.getAttribute("userLogged")!= null){
+              %>
+          <li class="nav-item">
+            <a class="nav-link" href="LogoutServlet">Pridaj príspevok</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.jsp">About</a>
+            <a class="nav-link" href="LogoutServlet">Odhlásiť sa</a>
+          </li>
+          <%
+            } else {
+          %>
+          <li class="nav-item">
+            <a class="nav-link" href="login.jsp">Prihlásiť sa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="post.jsp">Sample Post</a>
+            <a class="nav-link" href="registration.jsp">Nemám účet</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.jsp">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.jsp">Contact</a>
-          </li>
+          <%
+            }
+          %>
+
         </ul>
       </div>
     </div>
@@ -72,8 +86,17 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Clean Blog</h1>
-            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+            <h1>Môj blog</h1>
+            <span class="subheading">
+              <%
+                if(session.getAttribute("userLogged")!= null){
+                  User user = new UserEmailController().getUser(String.valueOf(session.getAttribute("userLogged")));
+                  out.print("Vitaj " +user.getName());
+                } else {
+                  %> Vitaj na mojom semestrálnom blogu<%
+                }
+              %>
+            </span>
           </div>
         </div>
       </div>
@@ -86,23 +109,25 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <%
-          for (int i = 0; i< postArrayList.size();i++) {
+          for (int i =0; i< postArrayList.size();i++) {
         %>
         <div class="post-preview">
-          <a href="post.jsp">
+          <a href="post.jsp?postId=<%=i+1%>">
             <h2 class="post-title">
-              <%=postArrayList.get(i).getTitle()%>
-            </h2>
-          </a>
-          <p class="post-meta">
-            <%=postArrayList.get(i).getText()%>
-            <a href="#">Start Bootstrap</a>
-            <%=postArrayList.get(i).getDate()%>
-          </p>
-        </div>
-        <hr>
-        <%
-          }
+                <%=postArrayList.get(i).getTitle()%>
+            </h2 >
+          </a >
+          <p class="post-meta" >
+
+                <%=postArrayList.get(i).getText()%>
+            <a href = "#" > Start Bootstrap</a >
+                <%=postArrayList.get(i).getDate()%>
+          </p >
+        </div >
+        <hr >
+
+                <%
+    }
         %>
         <!-- Pager -->
         <div class="clearfix">

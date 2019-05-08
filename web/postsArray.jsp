@@ -24,7 +24,12 @@
         </h2 >
     </a >
     <p class="post-meta" >
-        <%=postArrayList.get(i).getText().substring(0,150)+"..."%>
+        <%
+            String tempText  =postArrayList.get(i).getText();
+            int a;
+            if(tempText.length()<150){ a= tempText.length();}else { a = 150;};
+            out.print(tempText.substring(0,a)+"...");
+        %>
     </p >
     <p>
         <a  >Pridáné </a >

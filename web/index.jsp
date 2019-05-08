@@ -119,7 +119,7 @@
                   String temp  =postArrayList.get(i).getText();
                   int a;
                   if(temp.length()<150){ a= temp.length();}else { a = 150;};
-                  out.print(temp.substring(0,a));
+                  out.print(temp.substring(0,a)+"...");
                 %>
           </p >
           <p>

@@ -11,13 +11,14 @@ public class PostController {
 
         Post post = null;
         Connection connection = DatabaseConnectionManager.getConnection();
-        Statement s;
+        PreparedStatement preparedStatement;
         ResultSet rs;
 
         try {
-            s = connection.createStatement();
-            String sql = "SELECT * FROM posts WHERE id ="+postId+";";
-            rs = s.executeQuery(sql);
+            String sql = "SELECT * FROM posts WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,postId);
+            rs = preparedStatement.executeQuery();
             if(rs.next()) {
                 post = HelpMethods.getDataPost(rs);
             }

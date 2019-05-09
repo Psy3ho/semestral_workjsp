@@ -11,6 +11,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class HelpMethods {
 
@@ -51,10 +56,25 @@ public class HelpMethods {
 
         String filename = filePart.getInputStream().toString();
         InputStream fileContent = filePart.getInputStream();
-        File file1 =new File("C:\\Users\\egoeu.DESKTOP-3LRV9QH\\IdeaProjects\\semestral_work\\web\\img\\"+filename+"."+"png");
+        File file1 =new File("C:\\Users\\egoeu.DESKTOP-3LRV9QH\\IdeaProjects\\semestral_work\\out\\artifacts\\semestral_work_war_exploded\\public\\"+filename+"."+"png");
         BufferedImage imBuff = ImageIO.read(fileContent);
         ImageIO.write(imBuff, "png", file1);
         return filename;
+    }
+
+    public static Timestamp getTimestampFromString(String paDate) {
+        java.sql.Timestamp timeStampDate = null;
+
+        try {
+            DateFormat formatter;
+            formatter = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = formatter.parse(paDate);
+            timeStampDate = new Timestamp(date.getTime());
+
+        } catch (ParseException e) {
+            System.out.println("Exception :" + e);
+        }
+        return timeStampDate;
     }
 
 

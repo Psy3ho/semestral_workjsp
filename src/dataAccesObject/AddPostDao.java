@@ -1,14 +1,13 @@
 package dataAccesObject;
 
 import cards.Post;
-import cards.User;
 import dabasemanager.DatabaseConnectionManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
+@SuppressWarnings("ALL")
 public class AddPostDao {
     public String addPost(Post post)
     {

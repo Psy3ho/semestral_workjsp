@@ -10,8 +10,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     request.setCharacterEncoding("UTF-8");
-    int temp = Integer.valueOf(request.getParameter("page"));
-    ArrayList<Post> postArrayList =  new PostsController().getPosts(temp);
+    ArrayList<Post> postArrayList = null;
+
+    if (request.getParameter("page") != null){
+        int temp = Integer.valueOf(request.getParameter("page"));
+
+        postArrayList =  new PostsController().getPosts(temp);
+    } else if (request.getParameter("date1") != null) {
+
+        String tempDate1 = request.getParameter("date1");
+        String tempDate2 = request.getParameter("date2");
+        postArrayList =  new PostsController().getPostsByDate(tempDate1, tempDate2);
+    }
 %>
 
 <%

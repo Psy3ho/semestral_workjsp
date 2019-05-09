@@ -1,7 +1,10 @@
-<%@ page import="cards.User" %>
-<%@ page import="controllers.UserController" %>
 <%@ page import="cards.Post" %>
-<%@ page import="controllers.PostController" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="controllers.PostsController" %>
+<%@ page import="helpMetods.HelpMethods" %>
+<%@ page import="controllers.UserController" %>
+<%@ page import="cards.User" %>
+<%--
   Created by IntelliJ IDEA.
   User: egoeu
   Date: 5. 5. 2019
@@ -20,8 +23,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/imagecss.css?v=12" rel="stylesheet" >
-
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -31,28 +32,14 @@
     <!-- Custom styles for this template -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
 
-    <script>
-        function validate()
-        {
-            var title = document.form.title.value;
-            var text = document.form.text.value;
-            var file = document.form.file.value;
+    <!--  jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-            if (title==null || title=="")
-            {
-                alert("Napíšte titulok článku.");
-                return false;
-            }
-            else if (text==null || text=="")
-            {
-                alert("Napíšte aj obsah článku.");
-                return false;
-            } else if(file == null || file==""){
-                alert("Vyberte obrázok pre článok.");
-                return false;
-            }
-        }
-    </script>
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 </head>
 <body>
@@ -71,17 +58,24 @@
                     if(session.getAttribute("userLogged")!= null){
                 %>
                 <li class="nav-item">
-                    <a class="nav-link" href="datePosts.jsp">Hľadaj príspevky</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.jsp">Zrušiť</a>
+                    <a class="nav-link" href="addPost.jsp">Pridaj príspevok</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="LogoutServlet">Odhlásiť sa</a>
                 </li>
                 <%
+                } else {
+                %>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.jsp">Prihlásiť sa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="registration.jsp">Nemám účet</a>
+                </li>
+                <%
                     }
                 %>
+
             </ul>
         </div>
     </div>
@@ -94,15 +88,16 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="site-heading">
-                    <h1>Úprava príspevku</h1>
+                    <h1>Môj blog</h1>
                     <span class="subheading">
               <%
-                  String id = request.getParameter("postId");
-                  Post post = new PostController().getPost(id);
-                  User user = new UserController().getUserEmail(String.valueOf(session.getAttribute("userLogged")));
-                  out.print("Autor " +user.getName());
-
-              %>
+                  if(session.getAttribute("userLogged")!= null){
+                      User user = new UserController().getUserEmail(String.valueOf(session.getAttribute("userLogged")));
+                      out.print("Vitaj " +user.getName());
+                  } else {
+              %> Vitaj na mojom semestrálnom blogu<%
+                        }
+                    %>
             </span>
                 </div>
             </div>
@@ -111,38 +106,42 @@
 </header>
 
 
+
+
 <!-- Main Content -->
-<form enctype="multipart/form-data" class="text-center border border-light p-5" name="form" action="EditPostServlet" method="post" onsubmit="return validate()">
+<div class="container">
 
-    <!-- userId -->
-    <input type="hidden" name="id" id="id" value="<%=post.getId()%>"/>
+        <div class="col-lg-8 col-md-10 mx-auto" >
+            <div class="row">
+                <div class="bootstrap-iso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
 
-    <!-- Name -->
-    <input type="text" name="title" id="title" class="form-control mb-4" placeholder="Názov článku" value=<%=post.getTitle()%>>
+                                <!-- Form code begins -->
+                                <form method="post" class="form-inline">
+                                    <div class="form-group mr-4"> <!-- Date input -->
+                                        <input class="floated form-control" style="float:left" id="date1" name="date1" placeholder="MM/DD/YYY" type="text"/>
+                                    </div>
+                                    <div class="form-group mr-4"> <!-- Date input -->
+                                        <input class="form-control" id="date2" name="date2" placeholder="MM/DD/YYY" type="text"/>
+                                    </div>
+                                    <div class="form-group"> <!-- Submit button -->
+                                        <button type="button" class="btn btn-sm btn-primary " id="dates" >Hľadaj</button>
+                                    </div>
+                                </form>
+                                <!-- Form code ends -->
 
-
-    <!-- Message -->
-    <div class="form-group">
-        <textarea class="form-control rounded-0" name="text" id="text" rows="10" placeholder="Text článku"><%=post.getText()%></textarea>
-    </div>
-
-    <!-- Send picture -->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Zmeniť titulný obrázok
-        </div>
-        <div class="panel-body">
-            <div class="form-group">
-                <input type="file" name="file" id="file" class="inputfile"/>
-                <label for="file"><i class="fas fa-plus"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+            <div id="postsContainer">
+            </div>
+       </div>
 
-    <!-- Send button -->
-    <button class="btn btn-info btn-block" type="submit">Upraviť príspevok</button>
-
-</form>
+</div>
 
 <hr>
 
@@ -184,11 +183,11 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Custom scripts for this template -->
 <script src="js/clean-blog.min.js"></script>
+<script src="js/ajax-pagination.js"></script>
+<script src="js/show-date-posts.js"></script>
 
 </body>
 </html>

@@ -53,6 +53,9 @@
             if(session.getAttribute("userLogged")!= null){
               %>
           <li class="nav-item">
+            <a class="nav-link" href="datePosts.jsp">Hľadaj príspevky</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="addPost.jsp">Pridaj príspevok</a>
           </li>
           <li class="nav-item">
@@ -61,6 +64,9 @@
           <%
             } else {
           %>
+          <li class="nav-item">
+            <a class="nav-link" href="datePosts.jsp">Hľadaj príspevky</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="login.jsp">Prihlásiť sa</a>
           </li>

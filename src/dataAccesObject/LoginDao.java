@@ -18,12 +18,12 @@ public class LoginDao {
         String email = user.getEmail();
         String password = user.getPassword();
 
-        Connection con = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
+        Connection con;
+        Statement statement;
+        ResultSet resultSet ;
 
-        String emailDB = "";
-        String passwordDB = "";
+        String emailDB;
+        String passwordDB;
 
         try {
             con = DatabaseConnectionManager.getConnection();

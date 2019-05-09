@@ -16,8 +16,8 @@ public class RegisterDao {
         String email = user.getEmail();
         String password = user.getPassword();
 
-        Connection con = null;
-        PreparedStatement preparedStatement = null;
+        Connection con;
+        PreparedStatement preparedStatement;
 
         try
         {

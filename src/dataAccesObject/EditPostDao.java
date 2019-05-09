@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+@SuppressWarnings("Duplicates")
 public class EditPostDao {
     public String addPost(Post post)
     {
@@ -15,16 +16,28 @@ public class EditPostDao {
         String image = post.getImage();
         String id = post.getId();
 
-        Connection con = null;
-        PreparedStatement preparedStatement = null;
+        Connection con;
+        PreparedStatement preparedStatement;
+        String query;
 
         try
         {
             con = DatabaseConnectionManager.getConnection();
 
-            String query = "UPDATE posts SET title ='"+title+"', text ='"+text+"',image ='"+image+"' WHERE id ="+id+";";
-
-            preparedStatement = con.prepareStatement(query);
+            if(image != null) {
+                query = "UPDATE posts SET title = ?, text = ?,image = ? WHERE id =?";
+                preparedStatement = con.prepareStatement(query);
+                preparedStatement.setString(1,title);
+                preparedStatement.setString(2,text);
+                preparedStatement.setString(3,image);
+                preparedStatement.setString(4,id);
+            } else {
+                query = "UPDATE posts SET title = ?, text =? WHERE id =?";
+                preparedStatement = con.prepareStatement(query);
+                preparedStatement.setString(1,title);
+                preparedStatement.setString(2,text);
+                preparedStatement.setString(3,id);
+            }
             preparedStatement.executeUpdate();
             con.close();
 

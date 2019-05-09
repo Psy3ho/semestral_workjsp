@@ -25,5 +25,7 @@
     <orderEntry type="library" name="commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" name="at.favre.lib:bcrypt:0.8.0" level="project" />
     <orderEntry type="library" name="de.svenkubiak:jBCrypt:0.4.1" level="project" />
+    <orderEntry type="library" name="jquery-1.11.3" level="application" />
+    <orderEntry type="library" name="bootstrap-datepicker" level="application" />
   </component>
 </module>

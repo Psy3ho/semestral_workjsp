@@ -44,12 +44,12 @@
 
             if (email==null || email=="")
             {
-                alert("Username cannot be blank");
+                alert("Napíšte svoj email");
                 return false;
             }
             else if(password==null || password=="")
             {
-                alert("Password cannot be blank");
+                alert("Napíšte svoje heslo");
                 return false;
             }
         }

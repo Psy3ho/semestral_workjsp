@@ -1,6 +1,5 @@
 package dataAccesObject;
 
-import cards.Post;
 import dabasemanager.DatabaseConnectionManager;
 
 import java.sql.Connection;
@@ -10,14 +9,15 @@ import java.sql.SQLException;
 public class RemovePostDao {
     public String removePost(String id)
     {
-        Connection con = null;
-        PreparedStatement preparedStatement = null;
+        Connection con;
+        PreparedStatement preparedStatement;
 
         try
         {
             con = DatabaseConnectionManager.getConnection();
-            String query = "DELETE FROM posts WHERE id ="+id+";";
+            String query = "DELETE FROM posts WHERE id =?";
             preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1,id);
             preparedStatement.executeUpdate();
             con.close();
         }

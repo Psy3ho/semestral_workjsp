@@ -58,6 +58,9 @@
                     if(session.getAttribute("userLogged")!= null){
                 %>
                 <li class="nav-item">
+                    <a class="nav-link" href="datePosts.jsp">Hľadaj príspevky</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="LogoutServlet">Pridaj príspevok</a>
                 </li>
                 <li class="nav-item">
@@ -66,6 +69,9 @@
                 <%
                 } else {
                 %>
+                <li class="nav-item">
+                    <a class="nav-link" href="datePosts.jsp">Hľadaj príspevky</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.jsp">Prihlásiť sa</a>
                 </li>
@@ -81,7 +87,7 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('img/<%=post.getImage()%>')">
+<header class="masthead" style="background-image: url('<%=request.getContextPath()%>/public/<%=post.getImage()%>')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
